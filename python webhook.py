@@ -3,6 +3,9 @@ import os
 
 from flask import Flask, jsonify, request
 
+from guardar_sqlite import guardar_pedido
+from transcribir_audio import transcribir_audio
+
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -38,14 +41,46 @@ def recibir():
     for entry in data.get("entry", []):
         for change in entry.get("changes", []):
             value = change.get("value", {})
+
+            # Sacamos el nombre del contacto (si viene) - una vez por cada "value"
+            contacts = value.get("contacts", [])
+            nombre = contacts[0].get("profile", {}).get("name") if contacts else None
+
             for message in value.get("messages", []):
+                numero = message.get("from")
+                tipo = message.get("type")
+                timestamp = message.get("timestamp")
+                latitud = None
+                longitud = None
+
+                if tipo == "audio":
+                    media_id = message.get("audio", {}).get("id")
+                    try:
+                        texto = transcribir_audio(media_id)
+                    except Exception as e:
+                        logger.error("Error transcribiendo audio: %s", e)
+                        texto = "[No se pudo transcribir el audio]"
+                elif tipo == "location":
+                    ubicacion = message.get("location", {})
+                    latitud = ubicacion.get("latitude")
+                    longitud = ubicacion.get("longitude")
+                    texto = f"Ubicación compartida: {latitud}, {longitud}"
+                else:
+                    texto = message.get("text", {}).get("body")
+
+                # Guardamos el pedido en la base de datos
+                guardar_pedido(numero, nombre, texto, tipo, timestamp, latitud, longitud)
+
                 messages.append(
                     {
                         "id": message.get("id"),
-                        "from": message.get("from"),
-                        "type": message.get("type"),
-                        "text": message.get("text", {}).get("body"),
-                        "timestamp": message.get("timestamp"),
+                        "from": numero,
+                        "nombre": nombre,
+                        "type": tipo,
+                        "text": texto,
+                        "timestamp": timestamp,
+                        "latitud": latitud,
+                        "longitud": longitud,
                     }
                 )
 

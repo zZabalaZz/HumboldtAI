@@ -1,0 +1,20 @@
+# Entornos virtuales
+.venv/
+venv/
+
+# Archivos compilados de Python
+__pycache__/
+*.pyc
+
+# Claves y credenciales - NUNCA subir
+*.pem
+api key.txt
+api_key.txt
+*.key
+
+# Base de datos con datos reales/de prueba
+*.db
+reportes_raw.db
+
+# Archivos temporales de audio
+temp_*.ogg
