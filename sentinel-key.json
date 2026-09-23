@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "humboldtai",
+  "private_key_id": "a9d9a409708499e80c00a8c6135ac50d33bb1e61",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDq5jz6cLNwwOUg\n0DsxSraFlBcGN8cphQ5lk8Idf4PV7X6/of7eSuGytP7F02Lu1d+vkNJl+KQ5U/Wc\nwYKK7g6I/rhnX9pSCaiMzC0abhDnW1yQx1tyUWoiLaBci3fjS3KXJslrLnrkiob5\nAnKwuO9XI3rpTrXIY+usMftQOBulsdG5SmHMIIe08waQrfX/aFhxRN17KunWNVtM\nx3XbaQ5A2HnynWmrcBhKATDHXL9sBqfiuDU+7OKPfEQftnS038Uh8rH6zQSFSTeX\nDcMIUklfJtpP4x3WdZJHgZKCFAKblVfF7tR4gRmTHY4xkbOsAGQzHeBxkiJMTChn\niKKXxIs1AgMBAAECggEAaaqimaIjBkCvkcA6MGVEj/hbFx/2RpYlMMp0EuLuwkgw\nsTHFPef/eW10AjeiFIA/PHHwQ5DDB0refOKLv8Vw4m17NH1o72iK2rNqQq5qijiN\n/k6/s0AudyuBLMBMcQHajWYUS1PAUpiCOPfB8f9vIwrB2rveiENym6ZsP9zNiw4C\n9bqiqMK69/DuawGIvVvURsi1qTBVQ5fKYYbyUxAdeVh4OwilhP38AG/lZfxSZaTJ\ns5pJFG8WfiYJxioOlPrI++ddwlKdZ9wHYzPvOOCAEHf2N9ViDTnd8mGxaKeacNgJ\nm/fePXB/Aw40UjFNBw5lt3IaIYkyMcTdk2ShiPS9TQKBgQD6mXRa+DM3J1I91we+\nVytJS76c3kvq/sQGin8xBGcA787TE72+bbZ5XaPC1lGwc6W/UuLx3uqiiNANwSN5\n6hB6ZsN9nV1caCs6+tNuqAyhLNVRHf57+PRoBKsHHXwBV7ddseFNEcGE1JVq6/Yn\nEcVzyJ2Cox9obBw9gnfMNw7sSwKBgQDv9irKzbt0vY/q4NADeoX4MMu5xn3OHmd+\nKwVCWP0HO+t2eQZ6yAPbSal5CknqWhoJ9s++Qi3nKkeEvJ5ZQGzj4Iv04db+T7Hx\nmy7a3Cd2/LKCCGFmDmk7UD1roleq6XMhY4VINVvLWbJI1WJz8l1aonoriCJwsx51\n6pP6JiC2fwKBgQDRzqppA0Y11fj4B1DXXjnCauUShta+zz+lTk0A5/OpCB18ARoq\nFcbhQ7G4jSDlf110mluhLwX4wFyYN2yRRJM5N1JSl+6zUA9pmNht28p/In8SI++N\nMbjGYaojEd9hbGP70NKVaNlBcY4Lb7StryZGMt8UoafJEEJwiQvtcOdQkwKBgGR9\nLVxynX7852kQLmxWggX2wUoSIpsPxn1inLg1NfkykZ+yfREr89mAVpVWxq96fg8Q\nKd1eL4TwArVGm/V6cl9XqKSrcvJbA4TPXObQbUJ5/nNP+SHZBR6OsroBaT8stkcU\nOzuLBN76uBuiKLGvnIKZKhpSz0Fs8WOmEcQe9XIXAoGAB8hvTwPTNlvP99gqvE+g\nlbrV5j4UrKdFq7j0NTv949ZAUx9Zb4Z/xU/MNYvlej1cyrVMqcHfAcOdg4UiLoV/\nhLAXD1twupb8fcCg1Q72qTgAIEQ+viL2ZIdzFENcZ9hhZt7hjTMLgsfiOHV8KL9h\ntkkOgfL9JG9v2SFlUNzh13E=\n-----END PRIVATE KEY-----\n",
+  "client_email": "humboldtai@humboldtai.iam.gserviceaccount.com",
+  "client_id": "106106094411531852671",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/humboldtai%40humboldtai.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
