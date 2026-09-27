@@ -1,5 +1,6 @@
 import os
 from pymongo import MongoClient
+from bson.binary import Binary
 
 CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING", "mongodb://localhost:27017/")
 
@@ -29,7 +30,6 @@ def guardar_definitivo(reporte_id, fecha_hora, nombre, numero, mensaje_original,
             "type": "Point",
             "coordinates": [longitud, latitud],
         },
-        "imagen_url": None,
     }
 
     if datos_nasa is not None:
@@ -47,6 +47,9 @@ def guardar_definitivo(reporte_id, fecha_hora, nombre, numero, mensaje_original,
             "fecha_imagen_satelital": datos_sentinel.get("fecha_imagen_satelital"),
             "veredicto": veredicto_rio,
         }
+        imagen_bytes = datos_sentinel.get("imagen_bytes")
+        if imagen_bytes:
+            documento["rio"]["imagen"] = Binary(imagen_bytes)
 
     coleccion.insert_one(documento)
 
