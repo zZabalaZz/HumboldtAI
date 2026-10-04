@@ -28,3 +28,4 @@ humboldtai-*.json
 venv/
 *.log
 prueba_sentinel.png
+*.save
