@@ -18,3 +18,13 @@ reportes_raw.db
 
 # Archivos temporales de audio
 temp_*.ogg
+
+# Credenciales
+sentinel-key.json
+humboldtai-*.json
+.env
+
+# Entorno y temporales
+venv/
+*.log
+prueba_sentinel.png

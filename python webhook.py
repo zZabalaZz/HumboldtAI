@@ -15,7 +15,7 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-VERIFY_TOKEN = os.environ.get("WEBHOOK_VERIFY_TOKEN", "zzabalazz")
+VERIFY_TOKEN = os.environ["WEBHOOK_VERIFY_TOKEN"]
 
 
 @app.route("/webhook", methods=["GET"])

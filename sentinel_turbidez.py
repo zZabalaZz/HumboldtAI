@@ -2,9 +2,7 @@ import ee
 import os
 import requests
 
-SERVICE_ACCOUNT_KEY = os.environ.get(
-    "SENTINEL_KEY_PATH", "/home/zabala/HumboldtAI/sentinel-key.json"
-)
+SERVICE_ACCOUNT_KEY = os.environ["SENTINEL_KEY_PATH"]
 
 
 def _inicializar():

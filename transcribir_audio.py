@@ -2,7 +2,7 @@ import os
 import requests
 from faster_whisper import WhisperModel
 
-WHATSAPP_TOKEN = os.environ.get("WHATSAPP_TOKEN", "TOKEN_ELIMINADO")
+WHATSAPP_TOKEN = os.environ["WHATSAPP_TOKEN"]
 
 # Cargamos el modelo una sola vez al iniciar el servidor (no en cada mensaje, sería muy lento)
 # "small" es un buen balance para español en CPU. Si tu PC es potente, puedes probar "medium".
