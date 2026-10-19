@@ -1,7 +1,7 @@
 import logging
 import os
 from datetime import datetime
-
+from api import api as api_blueprint
 from flask import Flask, jsonify, request
 
 from guardar_postgres import guardar_pedido, buscar_ultimo_reporte_sin_ubicacion, marcar_como_procesado
@@ -12,6 +12,7 @@ from sentinel_turbidez import obtener_turbidez_sentinel
 from evaluar_reporte import es_reporte_climatico, es_reporte_rio, evaluar_coincidencia, evaluar_turbidez
 
 app = Flask(__name__)
+app.register_blueprint(api_blueprint)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
