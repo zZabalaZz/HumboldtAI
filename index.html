@@ -422,9 +422,10 @@
      (El navegador no se conecta directo a MongoDB: siempre pasa por la API.)
      ════════════════════════════════════════════════════════════════ */
   const CONFIG = {
-    USAR_API: false,
-    API_BASE: "http://localhost:3000/api",
-  };
+  USAR_API: true,
+  API_BASE: "/api",
+  COLECCIONES_API: ["reportes", "precipitacion"],
+};
 
   const DATOS_EJEMPLO = {
     estaciones: [
@@ -466,7 +467,7 @@
   };
 
   async function obtenerDatos(coleccion, municipio) {
-    if (CONFIG.USAR_API) {
+    if (CONFIG.USAR_API && CONFIG.COLECCIONES_API.includes(coleccion)) {
       const params = municipio !== "todos" ? `?municipio=${encodeURIComponent(municipio)}` : "";
       const resp = await fetch(`${CONFIG.API_BASE}/${ENDPOINTS[coleccion]}${params}`);
       if (!resp.ok) throw new Error(`Error ${resp.status} al consultar ${coleccion}`);
@@ -482,6 +483,7 @@
   const COLORES = { normal: "#2e9e5b", alerta: "#e9a21b", critico: "#d64545" };
   const ETIQUETA_ESTADO = { normal: "Normal", alerta: "Alerta", critico: "Crítico" };
   const hora = f => new Date(f).toLocaleString("es-CO", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   const CONSULTAS = [
     {
@@ -507,7 +509,8 @@
       desc: "Sensores vivos vía WhatsApp",
       coleccion: "reportes",
       item: d => ({ nombre: d.tipo, estado: d.estado, detalle: `${d.sensor} · ${hora(d.fecha)}` }),
-      popup: d => `<b>${d.tipo}</b><br>${d.sensor}<br>${hora(d.fecha)}`,
+      popup: d => `<b>${esc(d.tipo)}</b><br>${esc(d.sensor)}<br>${hora(d.fecha)}` +
+        (d.rio ? `<br><img src="${CONFIG.API_BASE}/reportes/${encodeURIComponent(d.id)}/imagen" alt="Imagen satelital" style="width:220px;margin-top:6px;border-radius:6px" onerror="this.remove()">` : ""),
     },
     {
       id: "zonas", icono: "🗺️", titulo: "Zonas de riesgo",
@@ -588,7 +591,8 @@
     capaResultados.clearLayers();
     Object.keys(marcadores).forEach(k => delete marcadores[k]);
 
-    const aviso = CONFIG.USAR_API ? "" : `<div class="aviso-datos">Datos de ejemplo. Se reemplazarán por los de MongoDB.</div>`;
+    const deApi = CONFIG.USAR_API && CONFIG.COLECCIONES_API.includes(consultaActiva.coleccion);
+    const aviso = deApi ? "" : `<div class="aviso-datos">Datos de ejemplo. Se reemplazarán por los de MongoDB.</div>`;
     if (!datos.length) {
       cont.innerHTML = aviso + `<p class="vacio">Sin resultados para este filtro.</p>`;
       return;
@@ -597,8 +601,8 @@
     cont.innerHTML = aviso + `<h3>${consultaActiva.titulo} · ${datos.length}</h3>` + datos.map(d => {
       const it = consultaActiva.item(d);
       return `<div class="item" data-id="${d.id}">
-        <div class="item-fila"><span class="item-nombre">${it.nombre}</span><span class="estado ${it.estado}">${ETIQUETA_ESTADO[it.estado]}</span></div>
-        <div class="item-detalle">${it.detalle}</div>
+        <div class="item-fila"><span class="item-nombre">${esc(it.nombre)}</span><span class="estado ${it.estado}">${ETIQUETA_ESTADO[it.estado]}</span></div>
+        <div class="item-detalle">${esc(it.detalle)}</div>
       </div>`;
     }).join("");
 
