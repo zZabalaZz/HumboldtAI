@@ -1,5 +1,6 @@
 import logging
 import os
+
 from datetime import datetime
 from api import api as api_blueprint
 from flask import Flask, jsonify, request
@@ -7,9 +8,11 @@ from flask import Flask, jsonify, request
 from guardar_postgres import guardar_pedido, buscar_ultimo_reporte_sin_ubicacion, marcar_como_procesado
 from guardar_cosmos import guardar_definitivo
 from transcribir_audio import transcribir_audio
-from nasa_power import obtener_clima_nasa
 from sentinel_turbidez import obtener_turbidez_sentinel
-from evaluar_reporte import es_reporte_climatico, es_reporte_rio, evaluar_coincidencia, evaluar_turbidez
+
+from nasa_power import obtener_clima_para_reporte
+from evaluar_reporte import es_reporte_climatico, es_reporte_sequia, es_reporte_rio, evaluar_coincidencia, evaluar_turbidez
+
 
 app = Flask(__name__)
 app.register_blueprint(api_blueprint)
@@ -58,7 +61,7 @@ def procesar_ubicacion(numero, nombre, latitud, longitud, fecha_hora):
 
     if es_clima:
         try:
-            datos_nasa = obtener_clima_nasa(latitud, longitud, fecha)
+            datos_nasa = obtener_clima_para_reporte(latitud, longitud, fecha, es_reporte_sequia(texto))
             veredicto_clima = evaluar_coincidencia(texto, datos_nasa)
         except Exception as e:
             logger.error("Error consultando NASA POWER: %s", e)

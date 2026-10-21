@@ -41,6 +41,7 @@ CENTROS = {"Girón": (7.07, -73.18), "Rionegro": (7.30, -73.19)}
 RADIO_MAX_KM = 25
 
 PALABRAS_TIPO = [
+    ("Sequía", ["sequía", "sequia", "reseco", "muy seco", "tierra seca", "no llueve", "no ha llovido"]),
     ("Lluvia", ["llover", "lloviendo", "lluvia", "aguacero", "diluvio", "tormenta", "granizo"]),
     ("Calor", ["calor", "caluroso", "hace mucho sol", "soleado"]),
     ("Frío", ["frío", "frio", "helado"]),

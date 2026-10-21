@@ -37,7 +37,7 @@ def revalidar_reportes_climaticos(dias_atras=7):
         lon = doc["ubicacion"]["coordinates"][0]
 
         try:
-            datos_nasa = obtener_clima_nasa(lat, lon, fecha_str)
+            datos_nasa = obtener_clima_para_reporte(lat, lon, fecha_str, es_reporte_sequia(doc["mensaje_original"]))
         except Exception as e:
             print(f"Error consultando NASA POWER para reporte #{doc['reporte_id']}: {e}")
             continue
