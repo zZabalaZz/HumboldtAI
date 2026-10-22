@@ -17,7 +17,7 @@ def _get_collection():
 
 def guardar_definitivo(reporte_id, fecha_hora, nombre, numero, mensaje_original,
                         latitud, longitud, datos_nasa=None, veredicto_clima=None,
-                        datos_sentinel=None, veredicto_rio=None):
+                           datos_sentinel=None, veredicto_rio=None, extra=None):
     coleccion = _get_collection()
 
     documento = {
@@ -55,6 +55,9 @@ def guardar_definitivo(reporte_id, fecha_hora, nombre, numero, mensaje_original,
         if imagen_bytes:
             documento["rio"]["imagen"] = Binary(imagen_bytes)
 
+    if extra:
+       documento.update(extra)
+           
     coleccion.insert_one(documento)
 
 
