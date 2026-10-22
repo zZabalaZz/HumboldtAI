@@ -41,7 +41,7 @@ def guardar_definitivo(reporte_id, fecha_hora, nombre, numero, mensaje_original,
             "viento_ms": datos_nasa.get("velocidad_viento_ms"),
             "veredicto": veredicto_clima,
         }
-    if datos_nasa.get("lluvia_acum_mm") is not None:
+    if datos_nasa and datos_nasa.get("lluvia_acum_mm") is not None:
         documento["clima"]["lluvia_acum_mm"] = datos_nasa["lluvia_acum_mm"]
         documento["clima"]["dias_secos"] = datos_nasa["dias_secos"]
 
